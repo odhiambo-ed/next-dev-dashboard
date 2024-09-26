@@ -24,6 +24,7 @@ body {
   font-family: 'Inter', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @layer components {
