@@ -74,24 +74,53 @@ function MenuItem({ item, index }) {
   );
 }
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }) {
   const sidebarRef = useRef(null);
 
   useEffect(() => {
-    gsap.from(sidebarRef.current, {
-      x: -100,
-      opacity: 0,
-      duration: 0.5,
-    });
-  }, []);
+    if (isOpen) {
+      gsap.to(sidebarRef.current, {
+        x: 0,
+        duration: 0.3,
+        ease: 'power2.out',
+      });
+    } else {
+      gsap.to(sidebarRef.current, {
+        x: '-100%',
+        duration: 0.3,
+        ease: 'power2.in',
+      });
+    }
+  }, [isOpen]);
 
   return (
-    <aside ref={sidebarRef} className="bg-gray-800 text-white w-64 min-h-screen p-4">
-      <nav>
-        {menuItems.map((item, index) => (
-          <MenuItem key={item.href} item={item} index={index} />
-        ))}
-      </nav>
-    </aside>
+    <>
+      <aside
+        ref={sidebarRef}
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-gray-800 text-white transform ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        } transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0`}
+      >
+        <div className="flex items-center justify-between p-4 lg:hidden">
+          <span className="text-xl font-semibold">Menu</span>
+          <button onClick={onClose} className="text-white focus:outline-none">
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <nav className="mt-5 px-2">
+          {menuItems.map((item, index) => (
+            <MenuItem key={item.href} item={item} index={index} />
+          ))}
+        </nav>
+      </aside>
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
+          onClick={onClose}
+        ></div>
+      )}
+    </>
   );
 }
