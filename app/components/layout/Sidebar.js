@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { gsap } from 'gsap';
 
 const menuItems = [
   {
@@ -34,11 +35,21 @@ const menuItems = [
   },
 ];
 
-function MenuItem({ item }) {
+function MenuItem({ item, index }) {
   const [isOpen, setIsOpen] = useState(false);
+  const itemRef = useRef(null);
+
+  useEffect(() => {
+    gsap.from(itemRef.current, {
+      opacity: 0,
+      x: -20,
+      duration: 0.5,
+      delay: index * 0.1,
+    });
+  }, [index]);
 
   return (
-    <div>
+    <div ref={itemRef}>
       <div className="flex items-center justify-between p-2 hover:bg-gray-700">
         <Link href={item.href} className="text-gray-300 hover:text-white">
           {item.title}
@@ -54,8 +65,8 @@ function MenuItem({ item }) {
       </div>
       {item.submenu && isOpen && (
         <div className="pl-4">
-          {item.submenu.map((subItem) => (
-            <MenuItem key={subItem.href} item={subItem} />
+          {item.submenu.map((subItem, subIndex) => (
+            <MenuItem key={subItem.href} item={subItem} index={subIndex} />
           ))}
         </div>
       )}
@@ -64,11 +75,21 @@ function MenuItem({ item }) {
 }
 
 export default function Sidebar() {
+  const sidebarRef = useRef(null);
+
+  useEffect(() => {
+    gsap.from(sidebarRef.current, {
+      x: -100,
+      opacity: 0,
+      duration: 0.5,
+    });
+  }, []);
+
   return (
-    <aside className="bg-gray-800 text-white w-64 min-h-screen p-4">
+    <aside ref={sidebarRef} className="bg-gray-800 text-white w-64 min-h-screen p-4">
       <nav>
-        {menuItems.map((item) => (
-          <MenuItem key={item.href} item={item} />
+        {menuItems.map((item, index) => (
+          <MenuItem key={item.href} item={item} index={index} />
         ))}
       </nav>
     </aside>
