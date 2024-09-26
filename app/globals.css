@@ -1,3 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /* Define your light theme variables here */
+  --primary-color: #3B82F6;
+  --secondary-color: #10B981;
+  --accent-color: #F59E0B;
+  --background-color: #FFFFFF;
+  --text-color: #1F2937;
+}
+
+.dark {
+  /* Define your dark theme variables here */
+  --primary-color: #60A5FA;
+  --secondary-color: #34D399;
+  --accent-color: #FBBF24;
+  --background-color: #1F2937;
+  --text-color: #F9FAFB;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
