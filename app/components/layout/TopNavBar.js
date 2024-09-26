@@ -1,9 +1,23 @@
+'use client';
+
+import { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import ThemeToggle from '../ui/ThemeToggle';
+import { gsap } from 'gsap';
 
 export default function TopNavBar() {
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    gsap.from(navRef.current, {
+      y: -50,
+      opacity: 0,
+      duration: 0.5,
+    });
+  }, []);
+
   return (
-    <nav className="bg-white dark:bg-gray-800 shadow-md">
+    <nav ref={navRef} className="bg-white dark:bg-gray-800 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
