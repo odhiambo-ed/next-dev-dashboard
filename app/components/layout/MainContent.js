@@ -1,6 +1,22 @@
+'use client';
+
+import { useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
+
 export default function MainContent() {
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    gsap.from(contentRef.current, {
+      opacity: 0,
+      y: 20,
+      duration: 0.5,
+      delay: 0.2,
+    });
+  }, []);
+
   return (
-    <main className="flex-grow p-6 bg-gray-100 dark:bg-gray-900">
+    <main ref={contentRef} className="flex-grow p-6 bg-gray-100 dark:bg-gray-900">
       <h1 className="text-3xl font-bold mb-4">Welcome to My Portfolio</h1>
       <p className="mb-4">
         This is where you'll showcase your projects and skills. Add more sections and content as needed.
