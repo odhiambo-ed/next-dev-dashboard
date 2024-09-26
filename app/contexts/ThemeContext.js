@@ -15,9 +15,15 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     localStorage.setItem('theme', theme);
     if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add('dark-transition');
+      setTimeout(() => {
+        document.documentElement.classList.add('dark');
+      }, 50);
     } else {
       document.documentElement.classList.remove('dark');
+      setTimeout(() => {
+        document.documentElement.classList.remove('dark-transition');
+      }, 300);
     }
   }, [theme]);
 

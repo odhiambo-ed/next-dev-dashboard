@@ -30,7 +30,7 @@ export default function TopNavBar({ onMenuClick }) {
               </svg>
             </button>
             <Image
-              src="/images/profile-picture.jpg"
+              src="/images/profile-picture.jpeg"
               alt="Profile Picture"
               width={40}
               height={40}
