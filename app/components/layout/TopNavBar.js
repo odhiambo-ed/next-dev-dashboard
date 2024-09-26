@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import ThemeToggle from '../ui/ThemeToggle';
 
 export default function TopNavBar() {
   return (
@@ -17,7 +18,7 @@ export default function TopNavBar() {
               Your Name
             </span>
           </div>
-          {/* Add more navigation items or controls here */}
+          <ThemeToggle />
         </div>
       </div>
     </nav>
