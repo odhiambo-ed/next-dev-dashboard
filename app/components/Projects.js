@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 const projects = [
   { id: 'project1', title: 'Project 1', description: 'Description of Project 1' },
   { id: 'project2', title: 'Project 2', description: 'Description of Project 2' },
-  // Add more projects as needed
 ];
 
 function Projects({ project }) {
