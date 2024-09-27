@@ -2,27 +2,33 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import AboutMe from '../sections/AboutMe';
-import TopComponents from '../sections/TopComponents';
-import FrontendProjects from '../sections/FrontendProjects';
-import BackendProjects from '../sections/BackendProjects';
-import TopArticles from '../sections/TopArticles';
+import MyIntro from '../sections/AboutMe/MyIntro';
+import MyResume from '../sections/AboutMe/MyResume';
+import PassGen from '../sections/TopComponents/PassGen';
+import PromptSearch from '../sections/TopComponents/PromptSearch';
+import FrontendProjectList from '../sections/FrontendProjects/ProjectList';
+import BackendProjectList from '../sections/BackendProjects/ProjectList';
+import HotTopics from '../sections/TopArticles/HotTopics';
 
 export default function MainContent({ selectedSection }) {
   const renderSection = () => {
     switch (selectedSection) {
-      case 'about':
-        return <AboutMe />;
-      case 'components':
-        return <TopComponents />;
-      case 'frontend':
-        return <FrontendProjects />;
-      case 'backend':
-        return <BackendProjects />;
-      case 'articles':
-        return <TopArticles />;
+      case 'about-0':
+        return <MyIntro />;
+      case 'about-1':
+        return <MyResume />;
+      case 'components-0':
+        return <PassGen />;
+      case 'components-1':
+        return <PromptSearch />;
+      case 'frontend-0':
+        return <FrontendProjectList />;
+      case 'backend-0':
+        return <BackendProjectList />;
+      case 'articles-0':
+        return <HotTopics />;
       default:
-        return <AboutMe />;
+        return <MyIntro />;
     }
   };
 

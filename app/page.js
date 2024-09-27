@@ -6,9 +6,9 @@ import Sidebar from './components/layout/Sidebar'
 import MainContent from './components/layout/MainContent'
 
 export default function Home() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedSection, setSelectedSection] = useState('about');
 
   useEffect(() => {
     const checkMobile = () => {
@@ -21,8 +21,8 @@ export default function Home() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const handleProjectSelect = (projectId) => {
-    setSelectedProject(projectId);
+  const handleSectionSelect = (sectionId) => {
+    setSelectedSection(sectionId);
     if (isMobile) {
       setSidebarOpen(false);
     }
@@ -36,9 +36,9 @@ export default function Home() {
           isOpen={sidebarOpen}
           onClose={() => setSidebarOpen(false)}
           isMobile={isMobile}
-          onProjectSelect={handleProjectSelect}
+          onSectionSelect={handleSectionSelect}
         />
-        <MainContent selectedProject={selectedProject} />
+        <MainContent selectedSection={selectedSection} />
       </div>
     </div>
   )
