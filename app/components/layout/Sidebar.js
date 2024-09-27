@@ -40,6 +40,7 @@ function SectionItem({ section, onSectionSelect }) {
           </button>
         ))}
       </div>
+      <hr className="border-gray-400 w-[60%] mx-auto mt-2 mb-2" />
     </motion.div>
   );
 }
