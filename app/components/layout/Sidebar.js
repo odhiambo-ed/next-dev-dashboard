@@ -1,55 +1,24 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { gsap } from 'gsap';
 
 const menuItems = [
-  {
-    title: 'Dashboard',
-    href: '/',
-  },
-  {
-    title: 'Projects',
-    href: '/projects',
-    submenu: [
-      {
-        title: 'Web Development',
-        href: '/projects/web-development',
-        submenu: [
-          { title: 'Frontend', href: '/projects/web-development/frontend' },
-          { title: 'Backend', href: '/projects/web-development/backend' },
-        ],
-      },
-      { title: 'Mobile Apps', href: '/projects/mobile-apps' },
-      { title: 'Design', href: '/projects/design' },
-    ],
-  },
-  {
-    title: 'About',
-    href: '/about',
-  },
-  {
-    title: 'Contact',
-    href: '/contact',
-  },
+  { title: 'Home', href: '/' },
+  { title: 'Projects', href: '/projects' },
+  { title: 'Skills', href: '#skills' },
+  { title: 'Contact', href: '#contact' },
 ];
 
 function MenuItem({ item, index }) {
   const [isOpen, setIsOpen] = useState(false);
-  const itemRef = useRef(null);
-
-  useEffect(() => {
-    gsap.from(itemRef.current, {
-      opacity: 0,
-      x: -20,
-      duration: 0.5,
-      delay: index * 0.1,
-    });
-  }, [index]);
-
   return (
-    <div ref={itemRef}>
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
       <div className="flex items-center justify-between p-2 hover:bg-gray-700">
         <Link href={item.href} className="text-gray-300 hover:text-white">
           {item.title}
@@ -70,36 +39,18 @@ function MenuItem({ item, index }) {
           ))}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
 
-export default function Sidebar({ isOpen, onClose }) {
-  const sidebarRef = useRef(null);
-
-  useEffect(() => {
-    if (isOpen) {
-      gsap.to(sidebarRef.current, {
-        x: 0,
-        duration: 0.3,
-        ease: 'power2.out',
-      });
-    } else {
-      gsap.to(sidebarRef.current, {
-        x: '-100%',
-        duration: 0.3,
-        ease: 'power2.in',
-      });
-    }
-  }, [isOpen]);
-
+function Sidebar({ isOpen, onClose }) {
   return (
     <>
-      <aside
-        ref={sidebarRef}
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-gray-800 text-white transform ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0`}
+      <motion.div
+        initial={{ x: '-100%' }}
+        animate={{ x: isOpen ? 0 : '-100%' }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        className="fixed inset-y-0 left-0 z-50 w-64 bg-gray-800 overflow-y-auto transition-all text-white lg:relative lg:translate-x-0"
       >
         <div className="flex items-center justify-between p-4 lg:hidden">
           <span className="text-xl font-semibold">Menu</span>
@@ -114,7 +65,7 @@ export default function Sidebar({ isOpen, onClose }) {
             <MenuItem key={item.href} item={item} index={index} />
           ))}
         </nav>
-      </aside>
+      </motion.div>
       {isOpen && (
         <div
           className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
@@ -125,3 +76,4 @@ export default function Sidebar({ isOpen, onClose }) {
   );
 }
 
+export default Sidebar;

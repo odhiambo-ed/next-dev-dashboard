@@ -1,23 +1,18 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
 import Image from 'next/image';
+import { useTheme } from '../../contexts/ThemeContext';
 import ThemeToggle from '../ui/ThemeToggle';
-import { gsap } from 'gsap';
+import { motion } from 'framer-motion';
 
-export default function TopNavBar({ onMenuClick }) {
-  const navRef = useRef(null);
-
-  useEffect(() => {
-    gsap.from(navRef.current, {
-      y: -50,
-      opacity: 0,
-      duration: 0.5,
-    });
-  }, []);
-
+function TopNavBar({ onMenuClick }) {
   return (
-    <nav ref={navRef} className="bg-white dark:bg-gray-800 shadow-md">
+    <motion.nav
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="bg-white dark:bg-gray-800 shadow-md"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -30,7 +25,7 @@ export default function TopNavBar({ onMenuClick }) {
               </svg>
             </button>
             <Image
-              src="/images/profile-picture.jpeg"
+              src="/profile-picture.jpg"
               alt="Profile Picture"
               width={40}
               height={40}
@@ -43,6 +38,8 @@ export default function TopNavBar({ onMenuClick }) {
           <ThemeToggle />
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }
+
+export default TopNavBar;
