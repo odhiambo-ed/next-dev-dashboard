@@ -44,13 +44,22 @@ function SectionItem({ section, onSectionSelect }) {
 function Sidebar({ isOpen, onClose, isMobile, onSectionSelect }) {
   return (
     <>
-      <motion.aside
-        initial={{ x: '-100%' }}
-        animate={{ x: isOpen ? 0 : '-100%' }}
-        transition={{ duration: 0.3 }}
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-vscode-sidebar-bg text-vscode-text overflow-y-auto ${
-          isMobile ? 'shadow-lg' : ''
-        }`}
+        {isMobile && (
+        <div
+          className={`fixed inset-0 bg-black bg-opacity-50 z-40 ${
+            isOpen ? 'block' : 'hidden'
+          }`}
+          onClick={onClose}
+        ></div>
+      )}
+      <aside
+        className={`${
+          isMobile
+            ? 'fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out'
+            : 'relative w-64 flex-shrink-0'
+        } ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        } bg-vscode-sidebar-bg text-vscode-text overflow-y-auto`}
       >
         <div className="p-4">
           <div className="flex flex-col gap-3 items-center mb-4">
@@ -78,13 +87,7 @@ function Sidebar({ isOpen, onClose, isMobile, onSectionSelect }) {
             </svg>
           </button>
         )}
-      </motion.aside>
-      {isMobile && isOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black bg-opacity-50"
-          onClick={onClose}
-        ></div>
-      )}
+      </aside>
     </>
   );
 }
