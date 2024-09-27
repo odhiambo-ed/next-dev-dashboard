@@ -1,18 +1,46 @@
+'use client';
+
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 export default function MyIntro() {
+  const [text, setText] = useState('');
+  const fullText = `My Name is EDWARD ODHIAMBO, I am a Software Engineer "Code My Escape"
+
+Full Stack Developer specializing in React, Next.js, and Rails. Experienced in multinational teams with strong communication skills.
+Passionate about learning new technologies. Married, father of 3.
+I've developed extensive knowledge in:
+
+-> Front-End: JavaScript, React, Redux, JQuery, HTML5, CSS3, Bootstrap, Tailwind, Semantic UI, Material UI
+-> Back-End: Ruby on Rails, PostgreSQL
+-> Tools & Methods: Git, Github, Heroku, Netlify, Mobile Development, Xcode, TDD, Chrome Dev Tools
+-> Professional: Remote Pair-Programming, Teamwork, Mentoring.
+`;
+
+  useEffect(() => {
+    let i = 0;
+    const typingEffect = setInterval(() => {
+      if (i < fullText.length) {
+        setText((prevText) => prevText + fullText.charAt(i));
+        i++;
+      } else {
+        clearInterval(typingEffect);
+      }
+    }, 20); // Adjust typing speed here
+
+    return () => clearInterval(typingEffect);
+  }, []);
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
+      className="font-mono"
     >
-      <h3 className="text-2xl font-semibold mb-4">My Intro</h3>
-      <p className="text-gray-600 dark:text-gray-300">
-        Hi, I'm [Your Name], a passionate full-stack developer with expertise in modern web technologies.
-        I specialize in creating efficient, scalable, and user-friendly applications using React, Node.js, and cloud technologies.
-        With a keen eye for detail and a problem-solving mindset, I strive to deliver high-quality code and innovative solutions.
-      </p>
+      <pre className="whitespace-pre-wrap text-green-500 bg-black p-4 rounded-lg overflow-hidden">
+        {text}
+      </pre>
     </motion.div>
   );
 }
