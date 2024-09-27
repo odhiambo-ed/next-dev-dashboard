@@ -38,8 +38,10 @@ export default function Home() {
           isMobile={isMobile}
           onSectionSelect={handleSectionSelect}
         />
+        <div className="flex-1 overflow-auto">
         <MainContent selectedSection={selectedSection} />
       </div>
+    </div>
     </div>
   )
 }
