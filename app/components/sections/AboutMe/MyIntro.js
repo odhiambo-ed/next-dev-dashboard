@@ -32,15 +32,16 @@ I've developed extensive knowledge in:
   }, []);
 
   return (
+    <div className="w-[60%] mx-auto" style={{ fontFamily: "'Playwrite NG Modern', sans-serif" }}>
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="font-mono"
     >
-      <pre className="whitespace-pre-wrap text-green-500 bg-black p-4 rounded-lg overflow-hidden">
+        <pre className="whitespace-pre-wrap text-green-500 bg-black p-4 rounded-lg overflow-hidden text-sm leading-relaxed">
         {text}
       </pre>
     </motion.div>
+    </div>
   );
 }
