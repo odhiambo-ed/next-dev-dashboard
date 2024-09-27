@@ -10,6 +10,11 @@
   --accent-color: #F59E0B;
   --background-color: #F3F4F6;
   --text-color: #1F2937;
+  --vscode-bg: #1e1e1e;
+  --vscode-sidebar-bg: #252526;
+  --vscode-text: #d4d4d4;
+  --vscode-active-tab: #1e1e1e;
+  --vscode-inactive-tab: #2d2d2d;
 }
 
 .dark {
@@ -18,6 +23,11 @@
   --accent-color: #FBBF24;
   --background-color: #111827;
   --text-color: #F9FAFB;
+  --vscode-bg: #1e1e1e;
+  --vscode-sidebar-bg: #252526;
+  --vscode-text: #d4d4d4;
+  --vscode-active-tab: #1e1e1e;
+  --vscode-inactive-tab: #2d2d2d;
 }
 
 body {

@@ -6,7 +6,13 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // You can add custom colors here later
+      colors: {
+        'vscode-bg': 'var(--vscode-bg)',
+        'vscode-sidebar-bg': 'var(--vscode-sidebar-bg)',
+        'vscode-text': 'var(--vscode-text)',
+        'vscode-active-tab': 'var(--vscode-active-tab)',
+        'vscode-inactive-tab': 'var(--vscode-inactive-tab)',
+      },
     },
   },
   plugins: [],
