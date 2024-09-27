@@ -4,16 +4,18 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import profilePic from '/public/images/profile-picture.jpeg';
+import { FaUser, FaPuzzlePiece, FaLaptopCode, FaServer, FaNewspaper } from 'react-icons/fa';
 
 const sections = [
-  { id: 'about', name: 'About Me', subsections: ['My Intro', 'My Resume'] },
-  { id: 'components', name: 'Top Components', subsections: ['Pass Gen', 'Prompt Search'] },
-  { id: 'frontend', name: 'Frontend Projects', subsections: ['Project List'] },
-  { id: 'backend', name: 'Backend Projects', subsections: ['Project List'] },
-  { id: 'articles', name: 'Top Articles', subsections: ['Hot Topics'] },
+  { id: 'about', name: 'About Me', icon: FaUser, subsections: ['My Intro', 'My Resume'] },
+  { id: 'components', name: 'Top Components', icon: FaPuzzlePiece, subsections: ['Pass Gen', 'Prompt Search'] },
+  { id: 'frontend', name: 'Frontend Projects', icon: FaLaptopCode, subsections: ['Project List'] },
+  { id: 'backend', name: 'Backend Projects', icon: FaServer, subsections: ['Project List'] },
+  { id: 'articles', name: 'Top Articles', icon: FaNewspaper, subsections: ['Hot Topics'] },
 ];
 
 function SectionItem({ section, onSectionSelect }) {
+  const Icon = section.icon;
   return (
         <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -22,11 +24,12 @@ function SectionItem({ section, onSectionSelect }) {
         >
             <button
         onClick={() => onSectionSelect(section.id)}
-        className="block py-2 px-4 text-sm text-vscode-text hover:bg-gray-700 w-full text-left"
+        className="flex items-center w-full py-2 px-4 text-sm text-vscode-text hover:bg-gray-700 text-left"
             >
+        <Icon className="mr-2" />
         {section.name}
-            </button>
-      <div className="pl-4">
+      </button>
+      <div className="pl-8">
         {section.subsections.map((subsection, index) => (
           <button
             key={index}
@@ -35,16 +38,16 @@ function SectionItem({ section, onSectionSelect }) {
           >
             {subsection}
           </button>
-                    ))}
+        ))}
       </div>
-            </motion.div>
-    );
+    </motion.div>
+  );
 }
 
 function Sidebar({ isOpen, onClose, isMobile, onSectionSelect }) {
   return (
     <>
-        {isMobile && (
+      {isMobile && (
         <div
           className={`fixed inset-0 bg-black bg-opacity-50 z-40 ${
             isOpen ? 'block' : 'hidden'
