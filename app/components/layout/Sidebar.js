@@ -17,39 +17,32 @@ function ProjectItem({ project, index }) {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <Link href={project.href} className="block p-2 text-vscode-text hover:bg-gray-700">
+      <Link href={project.href} className="block py-1 px-2 text-sm text-vscode-text hover:bg-gray-700">
         {project.name}
       </Link>
     </motion.div>
   );
 }
 
-function Sidebar({ isOpen, onClose }) {
+function Sidebar({ isOpen, onClose, isMobile }) {
   return (
     <>
       <motion.div
-        initial={{ x: '-100%' }}
-        animate={{ x: 0 }}
+        initial={isMobile ? { x: '-100%' } : { x: 0 }}
+        animate={{ x: (isMobile && !isOpen) ? '-100%' : 0 }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className="fixed inset-y-0 left-0 z-50 w-64 bg-vscode-sidebar-bg overflow-y-auto transition-all text-vscode-text lg:relative lg:translate-x-0"
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-vscode-sidebar-bg overflow-y-auto transition-all text-vscode-text ${isMobile ? '' : 'lg:relative lg:translate-x-0'}`}
       >
-        <div className="flex items-center justify-between p-4 lg:hidden">
-          <span className="text-xl font-semibold">Projects</span>
-          <button onClick={onClose} className="text-vscode-text focus:outline-none">
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-        <nav className="mt-5 px-2">
+        <nav className="mt-2 px-2">
+          <h2 className="text-xs uppercase tracking-wide text-gray-500 mb-2 px-2">Projects</h2>
           {projects.map((project, index) => (
             <ProjectItem key={project.href} project={project} index={index} />
           ))}
         </nav>
       </motion.div>
-      {isOpen && (
+      {isMobile && isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
+          className="fixed inset-0 z-40 bg-black bg-opacity-50"
           onClick={onClose}
         ></div>
       )}

@@ -5,24 +5,6 @@
 @tailwind utilities;
 
 :root {
-  --primary-color: #3B82F6;
-  --secondary-color: #10B981;
-  --accent-color: #F59E0B;
-  --background-color: #F3F4F6;
-  --text-color: #1F2937;
-  --vscode-bg: #1e1e1e;
-  --vscode-sidebar-bg: #252526;
-  --vscode-text: #d4d4d4;
-  --vscode-active-tab: #1e1e1e;
-  --vscode-inactive-tab: #2d2d2d;
-}
-
-.dark {
-  --primary-color: #60A5FA;
-  --secondary-color: #34D399;
-  --accent-color: #FBBF24;
-  --background-color: #111827;
-  --text-color: #F9FAFB;
   --vscode-bg: #1e1e1e;
   --vscode-sidebar-bg: #252526;
   --vscode-text: #d4d4d4;
@@ -32,9 +14,16 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--vscode-bg);
+  color: var(--vscode-text);
+}
+
+.dark {
+  --vscode-bg: #1e1e1e;
+  --vscode-sidebar-bg: #252526;
+  --vscode-text: #d4d4d4;
+  --vscode-active-tab: #1e1e1e;
+  --vscode-inactive-tab: #2d2d2d;
 }
 
 @layer components {
@@ -43,10 +32,10 @@ body {
   }
 
   .card {
-    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-lg;
+    @apply bg-vscode-inactive-tab rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-lg;
   }
 
   .section-title {
-    @apply text-3xl font-bold mb-8 text-center;
+    @apply text-xl font-bold mb-4;
   }
 }
